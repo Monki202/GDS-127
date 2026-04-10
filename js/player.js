@@ -54,6 +54,28 @@ function GameObject(x,y,w,h,color)
         this.color = "#ff0000";
     }
 
+
+    //SET UP BOUNDING BOX
+    this.left = function()
+    {
+        return this.x - this.width/2
+    }
+    this.right = function()
+    {
+        return this.x + this.width/2
+    }
+    this.top = function()
+    {
+        return this.y - this.height/2
+    }
+    this.bottom = function()
+    {
+        return this.y + this.height/2
+    }
+
+
+    this.prevX = this.x;
+
      this.vx = 0;
      this.vy = 0;
 
@@ -83,5 +105,19 @@ function GameObject(x,y,w,h,color)
      {
         this.x += this.vx;
         this.y += this.vy;
+     }
+
+     this.collisionCheck = function(obj)
+     {
+        if  (
+            this.left() < obj.right() &&
+            this.right() > obj.left() &&
+            this.top() < obj.bottom() &&
+            this.bottom() > obj.top() 
+            )
+            {
+                return true;
+            }
+            return false;
      }
 }

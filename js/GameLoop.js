@@ -30,23 +30,36 @@ function animate()
     player.move();
 
     
-    if(player.x > canvas.width + player.width/2 - 100)
+    if(player.x > canvas.width + player.width/2)
     {
-        player.vx *= -1;
-    }
-    if(player.x < 0 + player.width/2)
-    {
-        player.vx = 30;
-    }
-    if(player.y > canvas.height + player.height/2 - 100)
-    {
-        player.vy *= -1;
-    }
-    if(player.y < 0 + player.height/2)
-    {
-        player.vy = 30;
+        player.x = -player.width/2
     }
 
+    //NPC1 COLLISION
+
+    if(npc1.collisionCheck(player))
+    {
+        npc1.color = "yellow"
+    }
+    else
+    {
+        npc1.color = "green"
+    }
+
+    //NPC2 COLLISION
+    if(npc2.collisionCheck(player))
+        {
+            context.strokeRect(npc2.x-npc2.width/2, npc2.y-npc2.height/2, npc2.width, npc2.height);
+        } 
+
+        if(npc3.collisionCheck(player))
+        {
+            player.x = player.prevX;
+        }
+        else
+        {
+            player.prevX = player.x;
+        }
     player.drawCircle();
     npc1.drawCircle();
     npc2.drawCircle();
